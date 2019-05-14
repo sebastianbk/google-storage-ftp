@@ -110,4 +110,4 @@ After executing the command, your server should be running. You can test it out 
 
 ## Support
 
-If you run into any issues or if you have suggestions for how to improve the server, please either submit an issue or create a pull request with you suggested changes. I welcome any feedback to the project. :smiley:
+If you run into any issues or if you have suggestions for how to improve the server, please either submit an issue or create a pull request with your suggested changes. I welcome any feedback to the project. :smiley:
