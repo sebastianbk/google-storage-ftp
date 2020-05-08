@@ -17,11 +17,11 @@ If you do not already have the .NET Core 2.2 SDK installed on your computer, you
 
 ### 2. Authentication
 
-You should change the authentication mechanism in the `CustomMembershipProvider` class. By default, the server will authenticate any user that provides the username __admin__ and the password __admin__. You probably will want to change this.
+You should provide the environment variable  USERNAME and PWD when running the docker run command.
 
 ### 3. Bucket name
 
-You should also provide the name for your Google Cloud Storage bucket in the `GcsFileSystemProvider` class. You can either hard code the name into the file or decide to provide it via configuration or an environment variable. That's entirely up to you.
+You should also provide the environment variable BUCKET_NAME  for your Google Cloud Storage bucket when running the docker run command.
 
 ### 4. Service account
 
@@ -69,7 +69,7 @@ dotnet build -c Release
 Finally, run the server using Docker by executing this command:
 
 ```bash
-docker run -it \
+docker run -d -it \
     -p 20:20 \
     -p 21:21 \
     -p 989:989 \
@@ -84,6 +84,14 @@ docker run -it \
     -p 10007:10007 \
     -p 10008:10008 \
     -p 10009:10009 \
+    -e DISABLE_TLS=True \
+    -e PUBLIC_IP=192.168.117.11 \
+    -e BUCKET_NAME=the-bucket-name \
+    -e USERNAME=username \
+    -e PWD=password \
+    -e GOOGLE_APPLICATION_CREDENTIALS=/app/my-service-account.json \
+    -v /root/serviceaccount-bucket.json:/app/my-service-account.json:ro \
+    -v /root/NLog.config:/app/NLog.config:ro \
     sebastianbk/google-storage-ftp \
     ftp
 ```
