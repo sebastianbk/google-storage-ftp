@@ -10,7 +10,7 @@ namespace GoogleStorageFtp
         public async Task<MemberValidationResult> ValidateUserAsync(string name, string password)
         {
             // TODO: Implement a real authentication mechanism
-            var authenticated = await Task.Run(() => name == "admin" && password == "admin");
+            var authenticated = await Task.Run(() => name == Environment.GetEnvironmentVariable("USERNAME") && password == Environment.GetEnvironmentVariable("PWD"));
 
             if (authenticated)
             {
